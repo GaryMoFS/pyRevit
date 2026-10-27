@@ -108,7 +108,7 @@ namespace PyRevitLabs.PyRevit.Runtime.Agent {
 
     internal static class AgentIds {
         public static long ToValue(ElementId id) {
-#if REVIT2021 || REVIT2022 || REVIT2023
+#if REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023
             return id.IntegerValue;
 #else
             return id.Value;
@@ -116,7 +116,7 @@ namespace PyRevitLabs.PyRevit.Runtime.Agent {
         }
 
         public static ElementId FromValue(long value) {
-#if REVIT2021 || REVIT2022 || REVIT2023
+#if REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023
             return new ElementId(checked((int)value));
 #else
             return new ElementId(value);

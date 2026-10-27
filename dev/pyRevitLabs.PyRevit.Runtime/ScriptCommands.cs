@@ -651,7 +651,7 @@ namespace PyRevitLabs.PyRevit.Runtime {
                 if (HasSelection(uiApp, selectedCategories)) {
                     try {
                         foreach (Category category in selectedCategories) {
-#if !(REVIT2021 || REVIT2022 || REVIT2023)
+#if !(REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023)
                             if (category.Id.Value == _categoryId)
 #else
                             if (category.Id.IntegerValue == _categoryId)
@@ -667,7 +667,7 @@ namespace PyRevitLabs.PyRevit.Runtime {
 
             public override bool IsMatch(Category category) {
                 try {
-#if !(REVIT2021 || REVIT2022 || REVIT2023)
+#if !(REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023)
                     return category.Id.Value == _categoryId;
 #else
                     return category.Id.IntegerValue == _categoryId;
@@ -857,4 +857,3 @@ namespace PyRevitLabs.PyRevit.Runtime {
         }
     }
 }
-

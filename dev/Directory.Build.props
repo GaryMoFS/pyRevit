@@ -22,11 +22,22 @@
     <Company>pyRevitLabs.io</Company>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(UseRevit)' == 'true'">
+  <ItemGroup Condition="'$(UseRevit)' == 'true' and '$(RevitVersion)' != '2019'">
     <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*" />
     <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*" />
     <PackageReference Include="Nice3point.Revit.Api.AdWindows" Version="$(RevitVersion).*" />
     <PackageReference Include="Nice3point.Revit.Api.UIFramework" Version="$(RevitVersion).*" />
     <PackageReference Include="Nice3point.Revit.Api.UIFrameworkServices" Version="$(RevitVersion).*" />
+  </ItemGroup>
+  <PropertyGroup>
+    <Revit2019Path Condition="'$(Revit2019Path)' == ''">$(ProgramFiles)\Autodesk\Revit 2019</Revit2019Path>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(UseRevit)' == 'true' and '$(RevitVersion)' == '2019'">
+    <Reference Include="RevitAPI" HintPath="$(Revit2019Path)\RevitAPI.dll" />
+    <Reference Include="RevitAPIUI" HintPath="$(Revit2019Path)\RevitAPIUI.dll" />
+    <Reference Include="AdWindows" HintPath="$(Revit2019Path)\AdWindows.dll" />
+    <Reference Include="UIFramework" HintPath="$(Revit2019Path)\UIFramework.dll" />
+    <Reference Include="UIFrameworkServices" HintPath="$(Revit2019Path)\UIFrameworkServices.dll" />
+    <Reference Include="Xceed.Wpf.AvalonDock" HintPath="$(Revit2019Path)\Xceed.Wpf.AvalonDock.dll" />
   </ItemGroup>
 </Project>

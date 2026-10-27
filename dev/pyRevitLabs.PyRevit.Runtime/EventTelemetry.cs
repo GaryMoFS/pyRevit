@@ -202,7 +202,7 @@ namespace PyRevitLabs.PyRevit.Runtime {
 
                 var docProjProps = new Dictionary<string, object>();
                 foreach (Parameter param in pinfo.Parameters)
-#if !(REVIT2021 || REVIT2022 || REVIT2023)
+#if !(REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023)
                     if (param.Id.Value > 0)
 #else
                     if (param.Id.IntegerValue > 0)
@@ -387,7 +387,7 @@ namespace PyRevitLabs.PyRevit.Runtime {
 
         public void UIApplication_FormulaEditing(object sender, Autodesk.Revit.UI.Events.FormulaEditingEventArgs e) {
             var paramId = e.ParameterId;
-#if !(REVIT2021 || REVIT2022 || REVIT2023)
+#if !(REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023)
             long paramIdInt = 0;
 #else
             int paramIdInt = 0;
@@ -396,7 +396,7 @@ namespace PyRevitLabs.PyRevit.Runtime {
             Element param = null;
             if (paramId != null && paramId != ElementId.InvalidElementId) {
                 param = e.CurrentDocument != null ? e.CurrentDocument.GetElement(paramId) : param;
-#if !(REVIT2021 || REVIT2022 || REVIT2023)
+#if !(REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023)
                 paramIdInt = paramId.Value;
 #else
                 paramIdInt = paramId.IntegerValue;
@@ -809,7 +809,7 @@ namespace PyRevitLabs.PyRevit.Runtime {
                     { "category", typeCategory },
                     { "from_typename", origTypeName },
                     { "to_typename", e.NewName },
-#if !(REVIT2021 || REVIT2022 || REVIT2023)
+#if !(REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023)
                     { "to_typeid", e.NewElementTypeId.Value },
 #else
                     { "to_typeid", e.NewElementTypeId.IntegerValue },
@@ -876,7 +876,9 @@ namespace PyRevitLabs.PyRevit.Runtime {
                 projectnum = GetProjectNumber(e.Document),
                 projectname = GetProjectName(e.Document),
                 args = new Dictionary<string, object> {
+#if !REVIT2019
                     { "as_master_file", e.IsSavingAsCentralFile },
+#endif
                     { "path", e.PathName },
                 }
             }, sender, e);
@@ -891,7 +893,9 @@ namespace PyRevitLabs.PyRevit.Runtime {
                 projectname = GetProjectName(e.Document),
                 status = e.Status.ToString(),
                 args = new Dictionary<string, object> {
+#if !REVIT2019
                     { "as_master_file", e.IsSavingAsCentralFile },
+#endif
                     { "original_path",  e.OriginalPath },
                     { "project_info", GetProjectInfo(e.Document) }
                 }

@@ -17,7 +17,7 @@ namespace PyRevitLabs.PyRevit.Runtime {
             if (parsedQuery["command"] == "select" && parsedQuery["element[]"] != null) {
                 var idList = new List<ElementId>();
                 foreach (string strId in parsedQuery["element[]"].Split(',')) {
-#if !(REVIT2021 || REVIT2022 || REVIT2023)
+#if !(REVIT2019 || REVIT2021 || REVIT2022 || REVIT2023)
                     idList.Add(new ElementId(Convert.ToInt64(strId)));
 #else
                     idList.Add(new ElementId(Convert.ToInt32(strId)));

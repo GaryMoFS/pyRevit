@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RevitVersion>2019</RevitVersion>
+    <TargetFramework>net48</TargetFramework>
+    <DefineConstants>$(DefineConstants);REVIT2019</DefineConstants>
+  </PropertyGroup>
+</Project>
