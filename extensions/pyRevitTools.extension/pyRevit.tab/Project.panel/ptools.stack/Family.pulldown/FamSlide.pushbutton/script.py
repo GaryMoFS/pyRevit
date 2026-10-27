@@ -7,6 +7,10 @@ parameter changes (shape changes, constraint errors, etc.) without
 round-tripping through the Family Types dialog every time.
 """
 
+from feature_gate import require_revit_version
+
+require_revit_version(2022, "FamSlide")
+
 from pyrevit import forms, revit, script
 from pyrevit import DB
 from pyrevit.revit import events

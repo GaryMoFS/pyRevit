@@ -1,3 +1,7 @@
+from feature_gate import require_revit_version
+
+require_revit_version(2022, "Export Parameters to Excel")
+
 import xlsxwriter
 import os
 import re

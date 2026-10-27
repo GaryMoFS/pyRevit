@@ -1,5 +1,161 @@
 [
     {
+        "build": "20180216_1515",
+        "meta": {
+            "schema": "1.0",
+            "source": ""
+        },
+        "notes": "",
+        "product": "Autodesk Revit",
+        "release": "2019 First Customer Ship",
+        "target": "x64",
+        "version": "19.0.0.405"
+    },
+    {
+        "build": "20180328_1600",
+        "meta": {
+            "schema": "1.0",
+            "source": ""
+        },
+        "notes": "",
+        "product": "Autodesk Revit",
+        "release": "2019 Update for Trial Build",
+        "target": "x64",
+        "version": "19.0.1.1"
+    },
+    {
+        "build": "20180518_1600",
+        "meta": {
+            "schema": "1.0",
+            "source": ""
+        },
+        "notes": "",
+        "product": "Autodesk Revit",
+        "release": "2019.0.1",
+        "target": "x64",
+        "version": "19.0.10.18"
+    },
+    {
+        "build": "20180927_2315",
+        "meta": {
+            "schema": "1.0",
+            "source": ""
+        },
+        "notes": "",
+        "product": "Autodesk Revit",
+        "release": "2019.0.2",
+        "target": "x64",
+        "version": "19.0.20.1"
+    },
+    {
+        "build": "20180806_1515",
+        "meta": {
+            "schema": "1.0",
+            "source": ""
+        },
+        "notes": "",
+        "product": "Autodesk Revit",
+        "release": "2019.1",
+        "target": "x64",
+        "version": "19.1.0.112"
+    },
+    {
+        "build": "20181217_1515",
+        "meta": {
+            "schema": "1.0",
+            "source": ""
+        },
+        "notes": "",
+        "product": "Autodesk Revit",
+        "release": "2019.2 (Update)",
+        "target": "x64",
+        "version": "19.2.0.65"
+    },
+    {
+        "build": "20190108_1515",
+        "meta": {
+            "schema": "1.0",
+            "source": "https://twitter.com/JarodJSchultz/status/1100459171491676160"
+        },
+        "notes": "",
+        "product": "Autodesk Revit",
+        "release": "2019.2 (Full Install)",
+        "target": "x64",
+        "version": "19.2.1.1"
+    },
+    {
+        "build": "20190225_1515",
+        "meta": {
+            "schema": "1.0",
+            "source": "https://up.autodesk.com/2019/RVT/Autodesk_Revit_2019_2_1_Readme.html"
+        },
+        "notes": "https://up.autodesk.com/2019/RVT/Autodesk_Revit_2019_2_1_Readme.html",
+        "product": "Autodesk Revit",
+        "release": "2019.2.1",
+        "target": "x64",
+        "version": "19.2.10.7"
+    },
+    {
+        "build": "20190808_0900",
+        "meta": {
+            "schema": "1.0",
+            "source": "https://up.autodesk.com/2019/RVT/Autodesk_Revit_2019_2_2_Readme.html"
+        },
+        "notes": "https://up.autodesk.com/2019/RVT/Autodesk_Revit_2019_2_2_Readme.html",
+        "product": "Autodesk Revit",
+        "release": "2019.2.2 Hotfix",
+        "target": "x64",
+        "version": "19.2.20.24"
+    },
+    {
+        "build": "20210416_1515",
+        "meta": {
+            "schema": "1.0",
+            "source": "https://up.autodesk.com/2019/RVT/Autodesk_Revit_2019_2_3_Hotfix_Readme.html"
+        },
+        "notes": "https://up.autodesk.com/2019/RVT/Autodesk_Revit_2019_2_3_Hotfix_Readme.html",
+        "product": "Autodesk Revit",
+        "release": "2019.2.3",
+        "target": "x64",
+        "version": "19.2.30.41"
+    },
+    {
+        "build": "20211029_1515",
+        "meta": {
+            "schema": "1.0",
+            "source": "https://revit.downloads.autodesk.com/download/2019_2_4_RVT/Docs/RelNotes/Autodesk_Revit_2019_2_4_ReleaseNotes.html"
+        },
+        "notes": "https://revit.downloads.autodesk.com/download/2019_2_4_RVT/Docs/RelNotes/Autodesk_Revit_2019_2_4_ReleaseNotes.html",
+        "product": "Autodesk Revit",
+        "release": "2019.2.4",
+        "target": "x64",
+        "version": "19.2.40.15"
+    },
+    {
+        "build": "20220111_1110",
+        "meta": {
+            "schema": "1.0",
+            "source": "https://up.autodesk.com/2019/RVT/Revit-2019.2.5-Hotfix-Readme.html"
+        },
+        "notes": "https://up.autodesk.com/2019/RVT/Revit-2019.2.5-Hotfix-Readme.html",
+        "product": "Autodesk Revit",
+        "release": "2019.2.5",
+        "target": "x64",
+        "version": "19.2.50.16"
+    },
+    {
+        "build": "20220224_1700",
+        "meta": {
+            "schema": "1.0",
+            "source": "https://up.autodesk.com/2019/RVT/Revit-2019.2.6-Hotfix-Readme.html"
+        },
+        "notes": "https://up.autodesk.com/2019/RVT/Revit-2019.2.6-Hotfix-Readme.html",
+        "product": "Autodesk Revit",
+        "release": "2019.2.6",
+        "target": "x64",
+        "version": "19.2.60.3"
+    },
+    {
         "build": "20200220_1100",
         "meta": {
             "schema": "1.0",

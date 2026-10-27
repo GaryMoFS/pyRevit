@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+from feature_gate import require_revit_version
+
+require_revit_version(2022, "Measure")
+
 from collections import deque
 from math import pi, atan, sqrt, acos
 from pyrevit import revit, forms, script

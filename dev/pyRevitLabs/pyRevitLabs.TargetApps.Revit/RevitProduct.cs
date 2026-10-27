@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using pyRevitLabs.Common;
 using pyRevitLabs.Common.Extensions;
 using pyRevitLabs.NLog;
+using pyRevitLabs.Json;
 
 namespace pyRevitLabs.TargetApps.Revit {
     public class HostProductInfoMeta {
@@ -42,18 +43,7 @@ namespace pyRevitLabs.TargetApps.Revit {
         private static Regex BuildTargetFinder = new Regex(@".*\((?<target>[xX]\d{2})\).*");
         private static Regex InstallPathYearFinder = new Regex(@"Revit\s+(?<product_year>\d{4})", RegexOptions.IgnoreCase);
 
-        /// <summary>
-        /// Oldest Revit product year this pyRevit line supports.
-        /// </summary>
-        /// <remarks>
-        /// The C# loader replaced the legacy pure-Python loader, which was the
-        /// only pyRevit runtime that ran on pre-2021 Revit (see
-        /// <c>docs/architecture.md</c>), so <c>pyrevit-hosts.json</c> carries no
-        /// record before this year. Older installs are still detected so they can
-        /// be reported, but they must never be matched against a supported host
-        /// record: binding pyRevit to another release's record is what makes the
-        /// loader pull in assemblies built for a different Revit.
-        /// </remarks>
+        /// <summary>Oldest year in the continuous range of upstream-supported Revit versions.</summary>
         public const int MinimumSupportedProductYear = 2021;
 
         public static string ExtractBuildNumberFromString(string inputString) {
@@ -72,7 +62,7 @@ namespace pyRevitLabs.TargetApps.Revit {
 
         /// <summary>Whether this pyRevit line supports the given Revit product year.</summary>
         public static bool IsSupportedProductYear(int productYear) {
-            return productYear >= MinimumSupportedProductYear;
+            return productYear == 2019 || productYear >= MinimumSupportedProductYear;
         }
 
         /// <summary>Product year read off an install path, e.g. "C:\Program Files\Autodesk\Revit 2020\".</summary>
@@ -100,7 +90,7 @@ namespace pyRevitLabs.TargetApps.Revit {
         public static string GetUnsupportedProductNote(int productYear) {
             if (IsSupportedProductYear(productYear))
                 return null;
-            return string.Format("Note: Revit {0} is not supported by this version of pyRevit (requires Revit {1} or newer)",
+            return string.Format("Note: Revit {0} is not supported by this version of pyRevit (supports experimental Revit 2019 or Revit {1} and newer)",
                                  productYear, MinimumSupportedProductYear);
         }
 
@@ -196,7 +186,33 @@ namespace pyRevitLabs.TargetApps.Revit {
             return null;
         }
 
-        public static List<HostProductInfo> GetAllProductInfo() => _dstore.GetAllData();
+        /// <summary>Return cached host records plus the packaged experimental 2019 records.</summary>
+        public static List<HostProductInfo> GetAllProductInfo() {
+            var records = _dstore.GetAllData();
+            try {
+                var bundledPath = Path.Combine(_dstore.DefaultDataFilePath, _dstore.DataFileName);
+                if (!File.Exists(bundledPath))
+                    return records;
+                var bundled = JsonConvert.DeserializeObject<List<HostProductInfo>>(File.ReadAllText(bundledPath));
+                return MergeExperimental2019Records(records, bundled);
+            }
+            catch (Exception ex) {
+                logger.Warn("Could not load bundled Revit 2019 host records: {0}", ex.Message);
+                return records;
+            }
+        }
+
+        /// <summary>Keep upstream cache data while filling missing 2019 entries from the package.</summary>
+        public static List<HostProductInfo> MergeExperimental2019Records(List<HostProductInfo> cached, List<HostProductInfo> bundled) {
+            var combined = new List<HostProductInfo>(cached ?? new List<HostProductInfo>());
+            foreach (var item in bundled ?? new List<HostProductInfo>()) {
+                if (GetProductYearFromVersionString(item.version) != 2019)
+                    continue;
+                if (!combined.Any(existing => existing.version == item.version && existing.build == item.build))
+                    combined.Add(item);
+            }
+            return combined;
+        }
 
         public static string GetBinaryLocation(string installPath) {
             // make sure installPath is not null

@@ -2,6 +2,10 @@
 # type: ignore
 """Section Box Navigator - Modeless window for section box navigation."""
 
+from feature_gate import require_revit_version
+
+require_revit_version(2022, "Section Box Navigator")
+
 from pyrevit import revit, script, forms
 from pyrevit.framework import System, Controls, Media
 from pyrevit.revit import events, units

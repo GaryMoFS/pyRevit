@@ -66,4 +66,3 @@ tooltip:
     Abrir configuração para adicionar ou remover parâmetros rastreados
     e habilitar ou desabilitar o painel na inicialização.
 context: zero-doc
-min_revit_version: 2022

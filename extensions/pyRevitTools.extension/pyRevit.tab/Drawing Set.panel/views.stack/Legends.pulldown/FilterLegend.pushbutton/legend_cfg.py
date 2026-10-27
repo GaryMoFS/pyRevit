@@ -35,6 +35,13 @@ DEFAULTS_BOOL = {
 }
 
 
+def _length_units():
+    """Return millimetres and inches for the active Revit units API."""
+    if hasattr(DB, 'UnitTypeId'):
+        return DB.UnitTypeId.Millimeters, DB.UnitTypeId.Inches
+    return DB.DisplayUnitType.DUT_MILLIMETERS, DB.DisplayUnitType.DUT_DECIMAL_INCHES
+
+
 def get_length_unit(doc):
     """Decide which unit this tool should use for all user-facing length
     values (row height, spacing, swatch/column widths), based on the
@@ -46,8 +53,9 @@ def get_length_unit(doc):
     Returns:
         tuple: (unit_type_id, is_metric)
     """
-    display_unit = DB.UnitTypeId.Millimeters if is_metric(doc) else DB.UnitTypeId.Inches
-    return display_unit, is_metric(doc)
+    millimeters, inches = _length_units()
+    metric = is_metric(doc)
+    return (millimeters if metric else inches), metric
 
 
 def get_length_unit_symbol(is_metric):
@@ -70,7 +78,7 @@ def display_defaults(doc):
     converted = {}
     for key, mm_value in DEFAULTS_MM.items():
         internal_ft = DB.UnitUtils.ConvertToInternalUnits(
-            mm_value, DB.UnitTypeId.Millimeters
+            mm_value, _length_units()[0]
         )
         converted[key] = DB.UnitUtils.ConvertFromInternalUnits(
             internal_ft, display_unit
@@ -144,7 +152,7 @@ def build_settings_schema(doc, text_type_names):
         for min/max bounds that should scale sensibly whether the field
         is showing mm or inches."""
         internal_ft = DB.UnitUtils.ConvertToInternalUnits(
-            value, DB.UnitTypeId.Millimeters
+            value, _length_units()[0]
         )
         return DB.UnitUtils.ConvertFromInternalUnits(internal_ft, display_unit)
 

@@ -4,6 +4,10 @@
 # engine and scope persist across clicks. script.exit() is safe here —
 # it raises SystemExit which the runner catches without disposing the
 # engine. No new .NET objects created, no engine disposal side effects.
+from feature_gate import require_revit_version
+
+require_revit_version(2023, "Show View Range")
+
 from pyrevit import script
 
 logger = script.get_logger()

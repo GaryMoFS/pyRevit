@@ -1,6 +1,10 @@
 # encoding: utf-8
 # from https://discourse.pyrevitlabs.io/t/i-developed-a-tool-need-help-to-get-it-into-the-new-release-of-pyrevit/7639/3
 
+from feature_gate import require_revit_version
+
+require_revit_version(2022, "Move Viewport Label")
+
 from pyrevit import DB
 from pyrevit.revit import pick_point, pick_element_by_category, Transaction
 from pyrevit.forms import alert

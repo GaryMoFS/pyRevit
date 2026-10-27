@@ -18,6 +18,10 @@ Button's config-click action to adjust text type, row/column sizing,
 sort order, and auto-open behavior -- see config.py.
 """
 
+from feature_gate import require_revit_version
+
+require_revit_version(2022, "Filter Legend")
+
 from pyrevit import revit, forms, script, op
 from pyrevit import DB
 from pyrevit.coreutils.configparser import open_config_file

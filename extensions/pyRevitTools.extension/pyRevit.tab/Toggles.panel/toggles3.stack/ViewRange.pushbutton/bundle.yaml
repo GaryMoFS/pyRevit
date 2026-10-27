@@ -25,7 +25,6 @@ tooltip:
     Zunächst öffnet man eine 3D Ansicht, in der der Ansichtsbereich  eines Grundrisses farblich temporär mit Flächen dargestellt  werden soll. Nachdem man das Skript gestartet hat, muss man im  Projektbrowser eine Ansicht auswählen (z.B. einen Grundriss).  Die Oberkante (Top Plane), die Schnittebene (Cut Plane),  die Unterkane (Bottom Plane) und die Ebene der Ansichtstiefe  (View Depth) werden nun grafisch in der 3D Ansicht als  Fläche eingeblendet. Zudem werden im Dialog die Höhen angezeigt.
   pt_br: Ferramenta para ilustrar a faixa da vista de vistas de planta em uma vista 3D usando planos coloridos. Abra uma vista 3D e selecione as vistas de planta para ilustrar no navegador de projeto.
 author: Tamás Déri
-min_revit_version: 2023
 engine:
   clean: false
   full_frame: false

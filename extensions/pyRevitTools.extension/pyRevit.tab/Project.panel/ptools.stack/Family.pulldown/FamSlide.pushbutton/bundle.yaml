@@ -38,6 +38,5 @@ tooltip:
     caixa de diálogo Tipos de Família.
 authors: Archilizer Ltd / dnenov (original concept), wurschdhaud (migration)
 context: doc-family
-min_revit_version: 2022
 engine:
   persistent: true

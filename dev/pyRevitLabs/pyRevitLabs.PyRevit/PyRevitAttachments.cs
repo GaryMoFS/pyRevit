@@ -51,7 +51,7 @@ namespace pyRevitLabs.PyRevit {
                                   bool force = false) {
             if (!IsAttachableProductYear(revitYear))
                 throw new PyRevitException(
-                    $"Can not attach to Revit {revitYear}: this pyRevit line supports Revit "
+                    $"Can not attach to Revit {revitYear}: this pyRevit line supports experimental Revit 2019 and Revit "
                     + $"{RevitProductData.MinimumSupportedProductYear} or newer. Use a pyRevit release "
                     + $"that supports Revit {revitYear} to run pyRevit there.");
 

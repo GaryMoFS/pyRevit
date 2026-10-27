@@ -35,4 +35,3 @@ tooltip:
     O arquivo deve conter IDs de elemento válidos e valores de parâmetros no tipo de unidade configurado. 
     Parâmetros somente leitura e não suportados serão ignorados. O status modificável pelo usuário é ignorado.
 author: wurschdhaud
-min_revit_version: 2022

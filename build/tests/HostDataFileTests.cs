@@ -164,15 +164,14 @@ public sealed class HostDataFileTests
     }
 
     /// <summary>
-    /// RevitProductData.MinimumSupportedProductYear. A pre-2021 record would be listed as
-    /// supported while the C# loader cannot run on it.
+    /// RevitProductData.MinimumSupportedProductYear. The experimental 2019 runtime is included; other pre-2021 records remain unsupported.
     /// </summary>
     [TestMethod]
     public void No_record_sits_below_the_supported_floor()
     {
         const int minimumSupportedProductYear = 2021;
         var tooOld = LoadHosts()
-            .Where(host => 2000 + int.Parse(host.Version.Split('.')[0]) < minimumSupportedProductYear)
+            .Where(host => 2000 + int.Parse(host.Version.Split('.')[0]) < minimumSupportedProductYear && 2000 + int.Parse(host.Version.Split('.')[0]) != 2019)
             .Select(host => $"{host.Release} ({host.Version})")
             .ToList();
 

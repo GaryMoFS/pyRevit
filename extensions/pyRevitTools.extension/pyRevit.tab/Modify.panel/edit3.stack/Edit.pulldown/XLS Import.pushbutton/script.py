@@ -1,3 +1,7 @@
+from feature_gate import require_revit_version
+
+require_revit_version(2022, "Import Parameters to Excel")
+
 import os
 import xlrd
 import re

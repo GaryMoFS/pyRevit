@@ -33,11 +33,11 @@
     <Revit2019Path Condition="'$(Revit2019Path)' == ''">$(ProgramFiles)\Autodesk\Revit 2019</Revit2019Path>
   </PropertyGroup>
   <ItemGroup Condition="'$(UseRevit)' == 'true' and '$(RevitVersion)' == '2019'">
-    <Reference Include="RevitAPI" HintPath="$(Revit2019Path)\RevitAPI.dll" />
-    <Reference Include="RevitAPIUI" HintPath="$(Revit2019Path)\RevitAPIUI.dll" />
-    <Reference Include="AdWindows" HintPath="$(Revit2019Path)\AdWindows.dll" />
-    <Reference Include="UIFramework" HintPath="$(Revit2019Path)\UIFramework.dll" />
-    <Reference Include="UIFrameworkServices" HintPath="$(Revit2019Path)\UIFrameworkServices.dll" />
-    <Reference Include="Xceed.Wpf.AvalonDock" HintPath="$(Revit2019Path)\Xceed.Wpf.AvalonDock.dll" />
+    <Reference Include="RevitAPI" HintPath="$(Revit2019Path)\RevitAPI.dll" Private="false" />
+    <Reference Include="RevitAPIUI" HintPath="$(Revit2019Path)\RevitAPIUI.dll" Private="false" />
+    <Reference Include="AdWindows" HintPath="$(Revit2019Path)\AdWindows.dll" Private="false" />
+    <Reference Include="UIFramework" HintPath="$(Revit2019Path)\UIFramework.dll" Private="false" />
+    <Reference Include="UIFrameworkServices" HintPath="$(Revit2019Path)\UIFrameworkServices.dll" Private="false" />
+    <Reference Include="Xceed.Wpf.AvalonDock" HintPath="$(Revit2019Path)\Xceed.Wpf.AvalonDock.dll" Private="false" />
   </ItemGroup>
 </Project>

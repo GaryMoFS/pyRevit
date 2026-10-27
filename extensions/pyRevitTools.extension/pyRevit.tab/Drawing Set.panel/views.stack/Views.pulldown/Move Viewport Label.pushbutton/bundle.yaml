@@ -52,6 +52,5 @@ authors:
   - Tim Hevel
   - Jean-Marc Couffin (C# to python and refactor)
 
-min_revit_version: 2022
 context: active-sheet
 help_url: https://discourse.pyrevitlabs.io/t/i-developed-a-tool-need-help-to-get-it-into-the-new-release-of-pyrevit/7639/

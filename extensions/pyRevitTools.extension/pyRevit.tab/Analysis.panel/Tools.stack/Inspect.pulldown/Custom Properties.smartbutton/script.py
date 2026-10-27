@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
 """Toggle the Custom Properties dockable pane."""
 
-from pyrevit import forms, script
+from pyrevit import HOST_APP, forms, script
 from pyrevit.revit import ui
 from pyrevit.framework import Threading, System
 import pyrevit.extensions as exts
 from pyrevit.coreutils.ribbon import ICON_MEDIUM
-
-from panes.customprops.pane import CustomPropertiesPanel, CONFIG_SECTION
-
-_PANEL_ID = CustomPropertiesPanel.panel_id
+from feature_gate import require_revit_version
 
 
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
+    if HOST_APP.is_older_than(2022):
+        return True
+
+    from panes.customprops.pane import CustomPropertiesPanel
+    panel_id = CustomPropertiesPanel.panel_id
+
     def set_icon(is_shown):
         if is_shown:
             icon = ui.resolve_icon_file(script_cmp.directory, exts.DEFAULT_ON_ICON_FILE)
@@ -24,7 +27,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
 
     def update_icon_from_pane():
         try:
-            dockable = forms.get_dockable_panel(_PANEL_ID)
+            dockable = forms.get_dockable_panel(panel_id)
             set_icon(dockable.IsShown())
         except Exception:
             set_icon(False)
@@ -57,6 +60,9 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
 
 
 if __name__ == "__main__":
+    require_revit_version(2022, "Custom Properties")
+    from panes.customprops.pane import CustomPropertiesPanel, CONFIG_SECTION
+
     my_config = script.get_config(CONFIG_SECTION)
     if not my_config.get_option("enabled", False):
         forms.alert(
@@ -64,5 +70,7 @@ if __name__ == "__main__":
             title="Custom Properties",
             exitscript=True,
         )
-    dockable = forms.get_dockable_panel(_PANEL_ID)
-    forms.toggle_dockable_panel(_PANEL_ID, not dockable.IsShown())
+    dockable = forms.get_dockable_panel(CustomPropertiesPanel.panel_id)
+    forms.toggle_dockable_panel(
+        CustomPropertiesPanel.panel_id, not dockable.IsShown()
+    )

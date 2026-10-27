@@ -178,10 +178,22 @@ namespace pyRevitLabs.UnitTests.RevitProducts {
         [TestMethod()]
         public void MinimumSupportedProductYear_ExcludesRevit2020() {
             Assert.AreEqual(2021, RevitProductData.MinimumSupportedProductYear);
+            Assert.IsTrue(RevitProductData.IsSupportedProductYear(2019));
             Assert.IsFalse(RevitProductData.IsSupportedProductYear(2020));
             Assert.IsFalse(RevitProductData.IsSupportedProductYear(0));
             Assert.IsTrue(RevitProductData.IsSupportedProductYear(2021));
             Assert.IsTrue(RevitProductData.IsSupportedProductYear(2026));
+        }
+
+        [TestMethod()]
+        public void MergeExperimental2019Records_PreservesCacheAndAddsOnlyMissing2019() {
+            var cached = new List<HostProductInfo> { new HostProductInfo { version = "21.0.0.1", build = "20200101_0000" }, new HostProductInfo { version = "19.0.0.1", build = "20180101_0000" } };
+            var packaged = new List<HostProductInfo> { new HostProductInfo { version = "19.0.0.1", build = "20180101_0000" }, new HostProductInfo { version = "19.2.0.65", build = "20181217_1515" }, new HostProductInfo { version = "20.0.0.1", build = "20190101_0000" } };
+            var merged = RevitProductData.MergeExperimental2019Records(cached, packaged);
+            Assert.AreEqual(3, merged.Count);
+            Assert.AreEqual(2, cached.Count);
+            Assert.IsTrue(merged.Any(item => item.version == "19.2.0.65"));
+            Assert.IsFalse(merged.Any(item => item.version == "20.0.0.1"));
         }
 
         [TestMethod()]
